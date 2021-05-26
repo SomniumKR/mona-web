@@ -1,12 +1,15 @@
 import { AppProps } from 'next/app';
 import { css, Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
+import { ConnectionProvider } from 'providers/connection';
+import { WalletProvider } from 'providers/wallet';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Global
-        styles={css`
+    <ConnectionProvider>
+      <WalletProvider>
+        <Global
+          styles={css`
           ${emotionNormalize}
             html,
             body {
@@ -17,11 +20,11 @@ function MyApp({ Component, pageProps }: AppProps) {
               font-family: sans-serif;
             }
         `}
-      />
-      <Component {...pageProps} />
-      ;
-
-    </>
+        />
+        <Component {...pageProps} />
+        ;
+      </WalletProvider>
+    </ConnectionProvider>
   );
 }
 
