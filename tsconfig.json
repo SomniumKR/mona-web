@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "types": ["@emotion/react/types/css-prop"],
     "target": "es5",
     "lib": [

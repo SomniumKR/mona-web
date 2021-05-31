@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app';
 import { css, Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
+import { wrapper } from 'store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,10 +20,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       />
       <Component {...pageProps} />
-      ;
 
     </>
   );
 }
-
-export default MyApp;
+export default wrapper.withRedux(MyApp);
