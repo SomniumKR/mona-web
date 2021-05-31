@@ -40,6 +40,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "no-param-reassign": "off",
+    "consistent-return": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
