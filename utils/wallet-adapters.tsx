@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import Wallet from '@project-serum/sol-wallet-adapter';
-import { notify } from 'utils/notification';
 import type { PublicKey, Transaction } from '@solana/web3.js';
 
 export function SolletExtensionAdapter(_, network) {
@@ -12,10 +11,13 @@ export function SolletExtensionAdapter(_, network) {
   return {
     on: () => {},
     connect: () => {
+      // TODO: notify
+      /*
       notify({
         message: 'Sollet Extension Error',
         description: 'Please install the Sollet Extension for Chrome',
       });
+      */
     },
   };
 }
