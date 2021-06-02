@@ -41,6 +41,7 @@ module.exports = {
     "import/no-unresolved": "off",
     "no-param-reassign": "off",
     "consistent-return": "off",
+    "react/button-has-type": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
