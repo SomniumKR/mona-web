@@ -42,6 +42,7 @@ module.exports = {
     "no-param-reassign": "off",
     "consistent-return": "off",
     "react/button-has-type": "off",
+    "no-unused-vars": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

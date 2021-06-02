@@ -3,6 +3,8 @@ import Header from 'components/Header';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
 import ConnectWallet from 'containers/ConnectWallet';
+import Input from 'components/Input/Input';
+import { useState } from 'react';
 
 const Container = styled.div`
   width: 100%;
@@ -11,11 +13,24 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
+const SearchInput = styled(Input)`
+  width: 40%;
+  min-width: 480px;
+  max-width: 600px;
+`;
+
 export default function Index() {
+  const [searchInputText, setSearchInputText] = useState('');
+
+  const handleSearchInputChange = (value: string) => {
+    setSearchInputText(value);
+  };
+
   return (
     <Container>
       <Header>
         <Logo height={HEADER_HEIGHT} />
+        <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
         <ConnectWallet />
       </Header>
     </Container>
