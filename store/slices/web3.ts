@@ -5,10 +5,10 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from 'store';
 import {
   Chain, UpdateWalletParam, WalletAdapter,
+  EndpointValueType,
 } from 'types/web3';
 import { Connection } from '@solana/web3.js';
-import { ENDPOINTS } from 'utils/constants';
-import { EndpointValueType } from '../../types/web3';
+import { ENDPOINTS } from 'constants/web3';
 
 export interface Web3State {
   wallet: WalletAdapter;
