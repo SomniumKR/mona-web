@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import { colors, gradients } from 'constants/colors';
+import { COLORS, GRADIENTS } from 'constants/colors';
 import { css } from '@emotion/react';
 import { buttonStyle } from './styles';
 
@@ -14,8 +14,8 @@ function Button(props: Props) {
     <button
       css={css`
         ${buttonStyle}
-        background: ${redColor ? gradients.red : colors.white};
-        color: ${redColor ? colors.white : colors.black01};
+        background: ${redColor ? GRADIENTS.red : COLORS.white};
+        color: ${redColor ? COLORS.white : COLORS.black01};
       `}
       {...rest}
     >
