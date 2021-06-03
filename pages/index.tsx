@@ -7,6 +7,8 @@ import { HEADER_HEIGHT } from 'constants/styles';
 import ConnectWallet from 'containers/ConnectWallet';
 import Input from 'components/Input/Input';
 import { anchorStyle } from 'styles';
+import RadioButtonForm from 'components/Form/RadioButtonForm';
+import { FilterStatus } from 'types/search';
 
 const Container = styled.div`
   width: 100%;
@@ -31,8 +33,20 @@ const MenuContaner = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+const Aside = styled.aside`
+  width: 356px;
+  height: 100%;
+`;
+
+const MainContainer = styled.main`
+  width: 100%;
+  height: 100%;
+`;
+
 export default function Index() {
   const [searchInputText, setSearchInputText] = useState('');
+  const [statusFilterValue, setStatusFilterValue] = useState<FilterStatus>(null);
 
   const NAVBAR_MENU_LIST = [
     {
@@ -46,6 +60,25 @@ export default function Index() {
     {
       title: 'Docs',
       link: '/docs',
+    },
+  ];
+
+  const statusValues: FilterStatus[] = [
+    'On Auction', 'New', 'End',
+  ];
+
+  const handleStatusFilter = useCallback((value: FilterStatus) => {
+    setStatusFilterValue(value);
+  }, []);
+
+  const filterComponents = [
+    {
+      title: 'Status',
+      component: <RadioButtonForm
+        handleCheck={handleStatusFilter}
+        values={statusValues}
+        checkedValue={statusFilterValue}
+      />,
     },
   ];
 
@@ -72,6 +105,16 @@ export default function Index() {
         </MenuContaner>
         <ConnectWallet />
       </Header>
+      <MainContainer>
+        <Aside>
+          {filterComponents.map((filter) => (
+            <>
+              <h1>{filter.title}</h1>
+              {filter.component}
+            </>
+          ))}
+        </Aside>
+      </MainContainer>
     </Container>
   );
 }
