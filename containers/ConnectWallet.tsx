@@ -1,11 +1,15 @@
-import { useEffect, memo } from 'react';
+import { useEffect, memo, ComponentProps } from 'react';
 import {
   selectWallet, updateConnection, updateWallet, selectChain, selectConnection,
 } from 'store/slices/web3';
 import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
 import styled from '@emotion/styled';
-import Button from '../components/Button/Button';
+import Button from 'components/Button/Button';
+
+type ButtonProps = ComponentProps<typeof Button>;
+
+interface Props extends ButtonProps {}
 
 const StyledButton = styled(Button)`
   height: 38px;
@@ -13,7 +17,7 @@ const StyledButton = styled(Button)`
   font-size: 14px;
 `;
 
-function ConnectWallet() {
+function ConnectWallet({ ...rest } : Props) {
   const wallet = useAppSelector(selectWallet);
   const chain = useAppSelector(selectChain);
   const connection = useAppSelector(selectConnection);
@@ -68,7 +72,9 @@ function ConnectWallet() {
   }, [chain]);
 
   return (
-    <StyledButton type="button" onClick={connectWallet} redColor>Connect Wallet</StyledButton>
+    <StyledButton type="button" onClick={connectWallet} redColor {...rest}>
+      Connect Wallet
+    </StyledButton>
   );
 }
 
