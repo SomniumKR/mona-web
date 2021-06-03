@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import Header from 'components/Header';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
@@ -12,12 +11,14 @@ import RadioButtonForm from 'components/Form/RadioButtonForm';
 import { FilterCategory, FilterStatus } from 'types/search';
 import Accordian from 'components/Accordian/Accordian';
 import { COLORS } from 'constants/colors';
+import { Heading01 } from 'components/Heading/Heading01';
 
 const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: white;
   box-sizing: border-box;
+  font-family: 'SF-Pro-Text-Regular';
 `;
 
 const SearchInput = styled(Input)`
@@ -37,15 +38,23 @@ const MenuContainer = styled.div`
   justify-content: space-around;
 `;
 
+const MainContainer = styled.main`
+  width: 100%;
+  height: 100%;
+  display: flex;
+`;
+
 const Aside = styled.aside`
-  width: 356px;
+  width: 372px;
   height: calc(100vh - ${HEADER_HEIGHT});
   border-right: 1px solid ${COLORS.grey01};
 `;
 
-const MainContainer = styled.main`
-  width: 100%;
-  height: 100%;
+const Article = styled.article`
+  width: calc(100vw - 372px);
+  height: calc(100vh - ${HEADER_HEIGHT});
+  box-sizing: border-box;
+  padding: 0 14px;
 `;
 
 export default function Index() {
@@ -134,6 +143,12 @@ export default function Index() {
             </Accordian>
           ))}
         </Aside>
+        <Article>
+          <Heading01>
+            Marketplace
+          </Heading01>
+          {/* {nftList.map((nft) => <NFTCard nft={nft} />)} */}
+        </Article>
       </MainContainer>
     </Container>
   );

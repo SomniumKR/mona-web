@@ -16,7 +16,7 @@ function RadioButton(props: Props) {
         ${buttonStyle}
         background: ${checked ? GRADIENTS.red : COLORS.white};
         color: ${checked ? COLORS.white : COLORS.black01};
-        font-weight: lighter;
+        font-family: 'SF-Pro-Text-Light';
         padding: 9px 26px;
         font-size: 14px;
         border: 1px solid ${COLORS.grey01};

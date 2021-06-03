@@ -4,7 +4,6 @@ import { COLORS } from '../../constants/colors';
 export const headingStyle = css`
   white-space: pre-line;
   font-weight: normal;
-  font-family: 'Roboto';
   padding: 0px;
   color: ${COLORS.black};
 `;
