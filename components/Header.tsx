@@ -7,8 +7,9 @@ const Header = styled.header`
   height: ${HEADER_HEIGHT};
   display: flex;
   justify-content: space-between;
-  padding: 7px 15px;
+  padding: 11px 15px;
   box-sizing: border-box;
+  align-items: center;
 `;
 
 export default memo(Header);

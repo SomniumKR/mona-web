@@ -5,7 +5,7 @@ export const inputStyle = css`
   cursor: pointer;
   color: ${COLORS.black01};
   border-radius: 20px;
-  padding: 15px 28px;
+  padding: 4px 28px;
   background: #FFFFFF;
   border: 1px solid #E5E5E5;
   box-sizing: border-box;

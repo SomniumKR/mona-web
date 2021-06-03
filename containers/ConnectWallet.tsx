@@ -4,7 +4,14 @@ import {
 } from 'store/slices/web3';
 import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
+import styled from '@emotion/styled';
 import Button from '../components/Button/Button';
+
+const StyledButton = styled(Button)`
+  height: 38px;
+  width: 176px;
+  font-size: 14px;
+`;
 
 function ConnectWallet() {
   const wallet = useAppSelector(selectWallet);
@@ -61,9 +68,7 @@ function ConnectWallet() {
   }, [chain]);
 
   return (
-    <>
-      <Button type="button" onClick={connectWallet} redColor>Connect Wallet</Button>
-    </>
+    <StyledButton type="button" onClick={connectWallet} redColor>Connect Wallet</StyledButton>
   );
 }
 
