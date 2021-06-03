@@ -9,8 +9,9 @@ import ConnectWallet from 'containers/ConnectWallet';
 import Input from 'components/Input/Input';
 import { anchorStyle } from 'styles';
 import RadioButtonForm from 'components/Form/RadioButtonForm';
-import { FilterStatus } from 'types/search';
+import { FilterCategory, FilterStatus } from 'types/search';
 import Accordian from 'components/Accordian/Accordian';
+import { COLORS } from 'constants/colors';
 
 const Container = styled.div`
   width: 100%;
@@ -38,7 +39,8 @@ const MenuContainer = styled.div`
 
 const Aside = styled.aside`
   width: 356px;
-  height: 100%;
+  height: calc(100vh - ${HEADER_HEIGHT});
+  border-right: 1px solid ${COLORS.grey01};
 `;
 
 const MainContainer = styled.main`
@@ -49,6 +51,7 @@ const MainContainer = styled.main`
 export default function Index() {
   const [searchInputText, setSearchInputText] = useState('');
   const [statusFilterValue, setStatusFilterValue] = useState<FilterStatus>(null);
+  const [categoryFilterValue, setCategoryFilterValue] = useState<FilterCategory>(null);
 
   const NAVBAR_MENU_LIST = [
     {
@@ -69,8 +72,16 @@ export default function Index() {
     'On Auction', 'New', 'End',
   ];
 
+  const categoryValues: FilterCategory[] = [
+    'Item (TBD)', 'Classic',
+  ];
+
   const handleStatusFilter = useCallback((value: FilterStatus) => {
     setStatusFilterValue(value);
+  }, []);
+
+  const handleCategoryFilter = useCallback((value: FilterCategory) => {
+    setCategoryFilterValue(value);
   }, []);
 
   const filterComponents = [
@@ -80,6 +91,14 @@ export default function Index() {
         handleCheck={handleStatusFilter}
         values={statusValues}
         checkedValue={statusFilterValue}
+      />,
+    },
+    {
+      title: 'Category',
+      component: <RadioButtonForm
+        handleCheck={handleCategoryFilter}
+        values={categoryValues}
+        checkedValue={categoryFilterValue}
       />,
     },
   ];

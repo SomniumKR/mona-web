@@ -4,13 +4,15 @@ import { COLORS } from 'constants/colors';
 import Button from 'components/Button/Button';
 import RadioButton from 'components/Button/RadioButton';
 import { FilterStatus } from 'types/search';
+import { css } from '@emotion/react';
+import { FilterCategory } from '../../types/search';
 
 type RadioButtonProps = Omit<ComponentProps<typeof RadioButton>, 'checked'>
 
 interface Props extends RadioButtonProps {
-    values: FilterStatus[];
-    handleCheck: (value: FilterStatus) => void;
-    checkedValue: FilterStatus;
+    values: FilterStatus[] | FilterCategory[];
+    handleCheck: (value: FilterStatus | FilterCategory) => void;
+    checkedValue: FilterStatus | FilterCategory;
 }
 
 const Container = styled.div`
@@ -24,7 +26,7 @@ const Container = styled.div`
 
 const RadioContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 29px;
   width: 100%;
 `;
@@ -45,6 +47,13 @@ function RadioButtonForm({
             onClick={() => handleCheck(value)}
             checked={value === checkedValue}
             {...rest}
+            css={css`
+              margin-right: 20px;
+
+              &:last-child {
+                margin-right: 0;
+              }
+            `}
           >
             {value}
           </RadioButton>

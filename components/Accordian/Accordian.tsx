@@ -19,6 +19,8 @@ const TitleContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${COLORS.grey01};
+  padding: 0 15px;
+  box-sizing: border-box;
 `;
 
 function Accordian({ title, children }: Props) {
