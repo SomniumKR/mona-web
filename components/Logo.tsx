@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from 'next/image';
 
 interface Props {
@@ -15,4 +16,4 @@ function Logo({ height }: Props) {
   );
 }
 
-export default Logo;
+export default memo(Logo);

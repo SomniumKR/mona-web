@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, memo } from 'react';
 import { css } from '@emotion/react';
 import { inputStyle } from './styles';
 
@@ -24,4 +24,4 @@ function Input(props: Props) {
   );
 }
 
-export default Input;
+export default memo(Input);

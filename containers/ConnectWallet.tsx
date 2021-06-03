@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, memo } from 'react';
 import {
   selectWallet, updateConnection, updateWallet, selectChain, selectConnection,
 } from 'store/slices/web3';
@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
 import Button from '../components/Button/Button';
 
-export default function ConnectWallet() {
+function ConnectWallet() {
   const wallet = useAppSelector(selectWallet);
   const chain = useAppSelector(selectChain);
   const connection = useAppSelector(selectConnection);
@@ -66,3 +66,5 @@ export default function ConnectWallet() {
     </>
   );
 }
+
+export default memo(ConnectWallet);

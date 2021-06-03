@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from '@emotion/styled';
 import { HEADER_HEIGHT } from 'constants/styles';
 
@@ -10,4 +11,4 @@ const Header = styled.header`
   box-sizing: border-box;
 `;
 
-export default Header;
+export default memo(Header);

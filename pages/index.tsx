@@ -1,10 +1,10 @@
+import { useState, useCallback } from 'react';
 import styled from '@emotion/styled';
 import Header from 'components/Header';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
 import ConnectWallet from 'containers/ConnectWallet';
 import Input from 'components/Input/Input';
-import { useState } from 'react';
 
 const Container = styled.div`
   width: 100%;
@@ -22,9 +22,12 @@ const SearchInput = styled(Input)`
 export default function Index() {
   const [searchInputText, setSearchInputText] = useState('');
 
-  const handleSearchInputChange = (value: string) => {
-    setSearchInputText(value);
-  };
+  const handleSearchInputChange = useCallback(
+    (value: string) => {
+      setSearchInputText(value);
+    },
+    [],
+  );
 
   return (
     <Container>
