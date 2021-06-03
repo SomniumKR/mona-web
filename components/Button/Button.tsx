@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 import { COLORS, GRADIENTS } from 'constants/colors';
 import { css } from '@emotion/react';
 import { buttonStyle } from './styles';
@@ -19,9 +19,9 @@ function Button(props: Props) {
       `}
       {...rest}
     >
-      <span>{children}</span>
+      {children}
     </button>
   );
 }
 
-export default Button;
+export default memo(Button);

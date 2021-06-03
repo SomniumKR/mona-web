@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, memo } from 'react';
 import { COLORS, GRADIENTS } from 'constants/colors';
 import { css } from '@emotion/react';
 import { buttonStyle } from './styles';
@@ -16,6 +16,10 @@ function RadioButton(props: Props) {
         ${buttonStyle}
         background: ${checked ? GRADIENTS.red : COLORS.white};
         color: ${checked ? COLORS.white : COLORS.black01};
+        font-weight: lighter;
+        padding: 9px 26px;
+        font-size: 14px;
+        border: 1px solid ${COLORS.grey01};
       `}
       {...rest}
     >
@@ -24,4 +28,4 @@ function RadioButton(props: Props) {
   );
 }
 
-export default RadioButton;
+export default memo(RadioButton);

@@ -16,6 +16,22 @@ interface Props extends RadioButtonProps {
 const Container = styled.div`
   padding: 29px 15px 26px 15px;
   background-color: ${COLORS.lightRed};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  border-bottom: 1px solid ${COLORS.grey01};
+`;
+
+const RadioContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 29px;
+  width: 100%;
+`;
+
+const ApplyButton = styled(Button)`
+  padding: 12px 20px;
+  font-size: 12px;
 `;
 
 function RadioButtonForm({
@@ -23,14 +39,20 @@ function RadioButtonForm({
 }: Props) {
   return (
     <Container>
-      {values.map((value) => (
-        <RadioButton onClick={() => handleCheck(value)} checked={value === checkedValue} {...rest}>
-          {value}
-        </RadioButton>
-      ))}
-      <Button redColor>
+      <RadioContainer>
+        {values.map((value) => (
+          <RadioButton
+            onClick={() => handleCheck(value)}
+            checked={value === checkedValue}
+            {...rest}
+          >
+            {value}
+          </RadioButton>
+        ))}
+      </RadioContainer>
+      <ApplyButton redColor>
         Show Results
-      </Button>
+      </ApplyButton>
     </Container>
   );
 }

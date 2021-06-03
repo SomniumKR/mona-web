@@ -5,6 +5,7 @@ import { COLORS } from 'constants/colors';
 
 const Header = styled.header`
   width: 100%;
+  min-width: 800px;
   height: ${HEADER_HEIGHT};
   display: flex;
   justify-content: space-between;

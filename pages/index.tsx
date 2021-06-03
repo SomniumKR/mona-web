@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import Header from 'components/Header';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
@@ -9,6 +10,7 @@ import Input from 'components/Input/Input';
 import { anchorStyle } from 'styles';
 import RadioButtonForm from 'components/Form/RadioButtonForm';
 import { FilterStatus } from 'types/search';
+import Accordian from 'components/Accordian/Accordian';
 
 const Container = styled.div`
   width: 100%;
@@ -20,15 +22,15 @@ const Container = styled.div`
 const SearchInput = styled(Input)`
   width: 40%;
   height: 40px;
-  min-width: 480px;
-  max-width: 600px;
+  min-width: 340px;
+  max-width: 400px;
 `;
 
 const StyledLink = styled.a`
   ${anchorStyle}
 `;
 
-const MenuContaner = styled.div`
+const MenuContainer = styled.div`
   width: 280px;
   display: flex;
   justify-content: space-around;
@@ -94,7 +96,7 @@ export default function Index() {
       <Header>
         <Logo height={HEADER_HEIGHT} />
         <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
-        <MenuContaner>
+        <MenuContainer>
           {NAVBAR_MENU_LIST.map((menu) => (
             <Link href={menu.link}>
               <StyledLink>
@@ -102,16 +104,15 @@ export default function Index() {
               </StyledLink>
             </Link>
           ))}
-        </MenuContaner>
+        </MenuContainer>
         <ConnectWallet />
       </Header>
       <MainContainer>
         <Aside>
           {filterComponents.map((filter) => (
-            <>
-              <h1>{filter.title}</h1>
+            <Accordian title={filter.title}>
               {filter.component}
-            </>
+            </Accordian>
           ))}
         </Aside>
       </MainContainer>
