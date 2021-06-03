@@ -2,6 +2,7 @@ import { AppProps } from 'next/app';
 import { css, Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
 import { wrapper } from 'store';
+import { SFProTextFont } from 'styles';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,7 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               margin: 0;
               background: white;
               min-height: 100%;
-              font-family: sans-serif;
+              ${SFProTextFont}
             }
         `}
       />
