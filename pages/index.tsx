@@ -141,7 +141,7 @@ export default function Index(
             </Link>
           ))}
         </MenuContainer>
-        <ConnectWallet />
+        <ConnectWallet redColor />
       </Header>
       <MainContainer>
         <Aside>
