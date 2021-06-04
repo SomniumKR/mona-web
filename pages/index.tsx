@@ -59,7 +59,7 @@ const Article = styled.article`
   width: calc(100vw - 372px);
   height: calc(100vh - ${HEADER_HEIGHT});
   box-sizing: border-box;
-  padding: 0 14px;
+  padding: 24px 14px;
   overflow: auto;
 `;
 
