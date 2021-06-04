@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import Header from 'components/Header';
@@ -12,6 +13,10 @@ import { FilterCategory, FilterStatus } from 'types/search';
 import Accordian from 'components/Accordian/Accordian';
 import { COLORS } from 'constants/colors';
 import { Heading01 } from 'components/Heading/Heading01';
+import NFTCardList from 'components/NFTCard/NFTCardList';
+import mockNftList from 'public/mocks/nft.json';
+import axios from 'axios';
+import { NFT } from 'types/nft';
 
 const Container = styled.div`
   width: 100%;
@@ -54,10 +59,13 @@ const Article = styled.article`
   width: calc(100vw - 372px);
   height: calc(100vh - ${HEADER_HEIGHT});
   box-sizing: border-box;
-  padding: 0 14px;
+  padding: 24px 14px;
+  overflow: auto;
 `;
 
-export default function Index() {
+export default function Index(
+  { fetchedNftList }: InferGetServerSidePropsType<typeof getServerSideProps>,
+) {
   const [searchInputText, setSearchInputText] = useState('');
   const [statusFilterValue, setStatusFilterValue] = useState<FilterStatus>(null);
   const [categoryFilterValue, setCategoryFilterValue] = useState<FilterCategory>(null);
@@ -133,7 +141,7 @@ export default function Index() {
             </Link>
           ))}
         </MenuContainer>
-        <ConnectWallet />
+        <ConnectWallet redColor />
       </Header>
       <MainContainer>
         <Aside>
@@ -147,9 +155,21 @@ export default function Index() {
           <Heading01>
             Marketplace
           </Heading01>
-          {/* {nftList.map((nft) => <NFTCard nft={nft} />)} */}
+          {fetchedNftList && <NFTCardList nftList={fetchedNftList as NFT[]} /> }
         </Article>
       </MainContainer>
     </Container>
   );
 }
+
+export const getServerSideProps = async () => {
+  // const res = await axios.get<NFT[]>('/mocks/nft.json');
+  // const fetchedNftList = res.data;
+  const fetchedNftList = mockNftList;
+
+  return {
+    props: {
+      fetchedNftList,
+    },
+  };
+};

@@ -1,0 +1,47 @@
+[
+  {
+    "address": "0xasdasd21easdasdasddasdasd",
+    "holder": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "creator": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "price": "100",
+    "imageHash": "Qmasdasdsixnkvk0",
+    "imageUrl": "https://picsum.photos/id/88/200/300",
+    "title": "Cool Painting"
+  },
+  {
+    "address": "0xasdasd21easdasdasddasdasd",
+    "holder": "BdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "creator": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "price": "100",
+    "imageHash": "Qmasdasdsixnkvk0",
+    "imageUrl": "https://picsum.photos/id/88/50/300",
+    "title": "Cool Painting"
+  },
+  {
+    "address": "0xasdasd21easdasdasddasdasd",
+    "holder": "43MBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "creator": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "price": "100",
+    "imageHash": "Qmasdasdsixnkvk0",
+    "imageUrl": "https://picsum.photos/id/88/20/300",
+    "title": "Nice Painting"
+  },
+  {
+    "address": "0xasdasd21easdasdasddasdasd",
+    "holder": "BZXUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "creator": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "price": "100",
+    "imageHash": "Qmasdasdsixnkvk0",
+    "imageUrl": "https://picsum.photos/id/88/40/300",
+    "title": "Cool Painting"
+  },
+  {
+    "address": "0xasdasd21easdasdasddasdasd",
+    "holder": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "creator": "AZdMBUE5AypGfwKThdCBkzQkfYGrTWLP8MK6y8vbw5ri",
+    "price": "100",
+    "imageHash": "Qmasdasdsixnkvk0",
+    "imageUrl": "https://picsum.photos/id/88/100/300",
+    "title": "Hot Painting"
+  }
+]
