@@ -7,6 +7,7 @@ export const COLORS = {
   black01: '#444444',
   lightRed: '#FFF7F7',
   grey01: '#E5E5E5',
+  grey02: '#404040',
 };
 
 export const GRADIENTS = {

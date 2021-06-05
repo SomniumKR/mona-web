@@ -1,13 +1,8 @@
 import { useState, useCallback } from 'react';
 import { InferGetServerSidePropsType } from 'next';
-import Link from 'next/link';
 import styled from '@emotion/styled';
-import Header from 'components/Header';
-import Logo from 'components/Logo';
+import Header from 'components/Header/Header';
 import { HEADER_HEIGHT } from 'constants/styles';
-import ConnectWallet from 'containers/ConnectWallet';
-import Input from 'components/Input/Input';
-import { anchorStyle } from 'styles';
 import RadioButtonForm from 'components/Form/RadioButtonForm';
 import { FilterCategory, FilterStatus } from 'types/search';
 import Accordian from 'components/Accordian/Accordian';
@@ -24,23 +19,6 @@ const Container = styled.div`
   background-color: white;
   box-sizing: border-box;
   font-family: 'SF-Pro-Text-Regular';
-`;
-
-const SearchInput = styled(Input)`
-  width: 40%;
-  height: 40px;
-  min-width: 340px;
-  max-width: 400px;
-`;
-
-const StyledLink = styled.a`
-  ${anchorStyle}
-`;
-
-const MenuContainer = styled.div`
-  width: 280px;
-  display: flex;
-  justify-content: space-around;
 `;
 
 const MainContainer = styled.main`
@@ -69,21 +47,6 @@ export default function Index(
   const [searchInputText, setSearchInputText] = useState('');
   const [statusFilterValue, setStatusFilterValue] = useState<FilterStatus>(null);
   const [categoryFilterValue, setCategoryFilterValue] = useState<FilterCategory>(null);
-
-  const NAVBAR_MENU_LIST = [
-    {
-      title: 'Marketplace',
-      link: '/index',
-    },
-    {
-      title: 'Items',
-      link: '/items',
-    },
-    {
-      title: 'Docs',
-      link: '/docs',
-    },
-  ];
 
   const statusValues: FilterStatus[] = [
     'On Auction', 'New', 'End',
@@ -129,20 +92,7 @@ export default function Index(
 
   return (
     <Container>
-      <Header>
-        <Logo height={HEADER_HEIGHT} />
-        <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
-        <MenuContainer>
-          {NAVBAR_MENU_LIST.map((menu) => (
-            <Link href={menu.link}>
-              <StyledLink>
-                {menu.title}
-              </StyledLink>
-            </Link>
-          ))}
-        </MenuContainer>
-        <ConnectWallet redColor />
-      </Header>
+      <Header handleSearchInputChange={handleSearchInputChange} searchInputText={searchInputText} />
       <MainContainer>
         <Aside>
           {filterComponents.map((filter) => (
