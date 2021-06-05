@@ -3,8 +3,6 @@ import { InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
 import Header from 'components/Header/Header';
 import { HEADER_HEIGHT } from 'constants/styles';
-import Input from 'components/Input/Input';
-import { anchorStyle } from 'styles';
 import RadioButtonForm from 'components/Form/RadioButtonForm';
 import { FilterCategory, FilterStatus } from 'types/search';
 import Accordian from 'components/Accordian/Accordian';
@@ -21,23 +19,6 @@ const Container = styled.div`
   background-color: white;
   box-sizing: border-box;
   font-family: 'SF-Pro-Text-Regular';
-`;
-
-const SearchInput = styled(Input)`
-  width: 40%;
-  height: 40px;
-  min-width: 340px;
-  max-width: 400px;
-`;
-
-const StyledLink = styled.a`
-  ${anchorStyle}
-`;
-
-const MenuContainer = styled.div`
-  width: 280px;
-  display: flex;
-  justify-content: space-around;
 `;
 
 const MainContainer = styled.main`
