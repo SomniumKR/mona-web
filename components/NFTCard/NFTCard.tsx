@@ -75,7 +75,7 @@ const LinkWrapper = styled(Link)`
 
 function NFTCard({ nft }: Props) {
   return (
-    <LinkWrapper href={`/${nft.address}`}>
+    <LinkWrapper href={`/nft/${nft.address}`}>
       <Container>
         <HeaderContainer>
           <Holder>
