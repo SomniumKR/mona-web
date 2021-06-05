@@ -1,11 +1,8 @@
 import { useState, useCallback } from 'react';
 import { InferGetServerSidePropsType } from 'next';
-import Link from 'next/link';
 import styled from '@emotion/styled';
-import Header from 'components/Header';
-import Logo from 'components/Logo';
+import Header from 'components/Header/Header';
 import { HEADER_HEIGHT } from 'constants/styles';
-import ConnectWallet from 'containers/ConnectWallet';
 import Input from 'components/Input/Input';
 import { anchorStyle } from 'styles';
 import RadioButtonForm from 'components/Form/RadioButtonForm';
@@ -70,21 +67,6 @@ export default function Index(
   const [statusFilterValue, setStatusFilterValue] = useState<FilterStatus>(null);
   const [categoryFilterValue, setCategoryFilterValue] = useState<FilterCategory>(null);
 
-  const NAVBAR_MENU_LIST = [
-    {
-      title: 'Marketplace',
-      link: '/index',
-    },
-    {
-      title: 'Items',
-      link: '/items',
-    },
-    {
-      title: 'Docs',
-      link: '/docs',
-    },
-  ];
-
   const statusValues: FilterStatus[] = [
     'On Auction', 'New', 'End',
   ];
@@ -129,20 +111,7 @@ export default function Index(
 
   return (
     <Container>
-      <Header>
-        <Logo height={HEADER_HEIGHT} />
-        <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
-        <MenuContainer>
-          {NAVBAR_MENU_LIST.map((menu) => (
-            <Link href={menu.link}>
-              <StyledLink>
-                {menu.title}
-              </StyledLink>
-            </Link>
-          ))}
-        </MenuContainer>
-        <ConnectWallet redColor />
-      </Header>
+      <Header handleSearchInputChange={handleSearchInputChange} searchInputText={searchInputText} />
       <MainContainer>
         <Aside>
           {filterComponents.map((filter) => (
