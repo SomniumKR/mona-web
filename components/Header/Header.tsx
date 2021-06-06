@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
 import ConnectWallet from 'containers/ConnectWallet';
-import Input from 'components/Input/Input';
+import Input from 'components/Form/Input';
 import { anchorStyle } from 'styles';
 import { COLORS } from 'constants/colors';
 
