@@ -87,7 +87,7 @@ interface Props {
 
 export default function CreateNFTForm({ handleCancel }: Props) {
   const {
-    register, handleSubmit, errors, formState,
+    register, handleSubmit, formState,
   } = useForm();
   const { isDirty, isSubmitting } = formState;
 
