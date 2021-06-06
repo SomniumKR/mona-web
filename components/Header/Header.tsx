@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
@@ -32,7 +33,7 @@ const StyledLink = styled.a`
 `;
 
 const MenuContainer = styled.div`
-  width: 280px;
+  width: 300px;
   display: flex;
   justify-content: space-around;
 `;
@@ -46,21 +47,25 @@ export default function Index({ handleSearchInputChange, searchInputText }: Prop
   const NAVBAR_MENU_LIST = [
     {
       title: 'Marketplace',
-      link: '/index',
-    },
-    {
-      title: 'Items',
-      link: '/items',
+      link: '/',
     },
     {
       title: 'Docs',
       link: '/docs',
     },
+    {
+      title: 'My Collections',
+      link: '/mycollection',
+    },
   ];
 
   return (
     <Container>
-      <Logo height={HEADER_HEIGHT} />
+      <Link href="/">
+        <a>
+          <Logo height={HEADER_HEIGHT} />
+        </a>
+      </Link>
       <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
       <MenuContainer>
         {NAVBAR_MENU_LIST.map((menu) => (
