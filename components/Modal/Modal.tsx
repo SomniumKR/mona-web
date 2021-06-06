@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 const Contents = styled.div`
-  margin: 6% auto;
+  margin: 4% auto;
   text-align: center;
 `;
 

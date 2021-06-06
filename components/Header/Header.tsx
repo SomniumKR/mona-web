@@ -11,7 +11,7 @@ import { COLORS } from 'constants/colors';
 
 const Container = styled.div`
   width: 100%;
-  min-width: 800px;
+  min-width: 1000px;
   height: ${HEADER_HEIGHT};
   display: flex;
   justify-content: space-between;
