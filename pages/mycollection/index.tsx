@@ -8,6 +8,8 @@ import { Heading01 } from 'components/Heading/Heading01';
 import { css } from '@emotion/react';
 import Button from 'components/Button/Button';
 import { Heading00 } from 'components/Heading/Heading00';
+import Modal from 'components/Modal/Modal';
+import CreateNFTForm from 'containers/CreateNFTForm';
 
 const Container = styled.div`
   width: 100%;
@@ -54,27 +56,41 @@ export default function NFT({ nft }:
     [],
   );
 
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+
+  const toogleCreateButton = () => {
+    setCreateModalOpen(!isCreateModalOpen);
+  };
+
   return (
-    <Container>
-      <Header handleSearchInputChange={handleSearchInputChange} searchInputText={searchInputText} />
-      <Heading00>
-        My Collections
-      </Heading00>
-      <Paragraph>
-        Here you can see the NFT collections you made!
-      </Paragraph>
-      <Box>
+    <>
+      <Container>
+        <Header
+          handleSearchInputChange={handleSearchInputChange}
+          searchInputText={searchInputText}
+        />
         <Heading00>
-          🖼 🎧 🌏 👽 🔫 📮
+          My Collections
         </Heading00>
-        <Heading01 css={css`color: ${COLORS.grey02}`}>
-          Create new NFT
-        </Heading01>
-        <Button redColor>
-          Create
-        </Button>
-      </Box>
-    </Container>
+        <Paragraph>
+          Here you can see the NFT collections you made!
+        </Paragraph>
+        <Box>
+          <Heading00>
+            🖼 🎧 🌏 👽 🔫 📮
+          </Heading00>
+          <Heading01 css={css`color: ${COLORS.grey02}`}>
+            Create new NFT
+          </Heading01>
+          <Button redColor onClick={toogleCreateButton}>
+            Create
+          </Button>
+        </Box>
+      </Container>
+      <Modal isOpen={isCreateModalOpen} onClose={toogleCreateButton}>
+        <CreateNFTForm handleCancel={toogleCreateButton} />
+      </Modal>
+    </>
   );
 }
 
