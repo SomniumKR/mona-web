@@ -69,6 +69,7 @@ const StyledTextarea = styled(RHFTextarea)`
   margin: 16px 0 24px 0;
   font-size: 16px;
   line-height: 29px;
+  resize: none;
 
   &:focus {
     outline-color: ${COLORS.red01};
