@@ -15,6 +15,7 @@ import { NFT } from 'types/nft';
 
 const Container = styled.div`
   width: 100%;
+  min-width: 1000px;
   height: 100%;
   background-color: white;
   box-sizing: border-box;
@@ -34,8 +35,8 @@ const Aside = styled.aside`
 `;
 
 const Article = styled.article`
-  width: calc(100vw - 372px);
-  height: calc(100vh - ${HEADER_HEIGHT});
+  width: calc(100% - 372px);
+  height: calc(100% - ${HEADER_HEIGHT});
   box-sizing: border-box;
   padding: 24px 14px;
   overflow: auto;

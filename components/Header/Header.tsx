@@ -1,16 +1,16 @@
-import { useState, useCallback } from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import Logo from 'components/Logo';
 import { HEADER_HEIGHT } from 'constants/styles';
 import ConnectWallet from 'containers/ConnectWallet';
-import Input from 'components/Input/Input';
+import Input from 'components/Form/Input';
 import { anchorStyle } from 'styles';
 import { COLORS } from 'constants/colors';
 
 const Container = styled.div`
   width: 100%;
-  min-width: 800px;
+  min-width: 1000px;
   height: ${HEADER_HEIGHT};
   display: flex;
   justify-content: space-between;
@@ -32,7 +32,7 @@ const StyledLink = styled.a`
 `;
 
 const MenuContainer = styled.div`
-  width: 280px;
+  width: 300px;
   display: flex;
   justify-content: space-around;
 `;
@@ -46,21 +46,25 @@ export default function Index({ handleSearchInputChange, searchInputText }: Prop
   const NAVBAR_MENU_LIST = [
     {
       title: 'Marketplace',
-      link: '/index',
-    },
-    {
-      title: 'Items',
-      link: '/items',
+      link: '/',
     },
     {
       title: 'Docs',
       link: '/docs',
     },
+    {
+      title: 'My Collections',
+      link: '/mycollection',
+    },
   ];
 
   return (
     <Container>
-      <Logo height={HEADER_HEIGHT} />
+      <Link href="/">
+        <a>
+          <Logo height={HEADER_HEIGHT} />
+        </a>
+      </Link>
       <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
       <MenuContainer>
         {NAVBAR_MENU_LIST.map((menu) => (
@@ -71,7 +75,7 @@ export default function Index({ handleSearchInputChange, searchInputText }: Prop
           </Link>
         ))}
       </MenuContainer>
-      <ConnectWallet redColor />
+      <ConnectWallet />
     </Container>
   );
 }

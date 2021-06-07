@@ -10,4 +10,8 @@ export const inputStyle = css`
   border: 1px solid #E5E5E5;
   box-sizing: border-box;
   border-radius: 20px;
+
+  &:focus {
+    outline-color: ${COLORS.red01};
+  }
 `;

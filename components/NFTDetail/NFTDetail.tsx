@@ -9,7 +9,7 @@ import Button from 'components/Button/Button';
 import { NFT } from 'types/nft';
 
 const Container = styled.div`
-   width: 83vw;
+  width: 83vw;
   min-width: 800px;
   max-width: 1200px;
   height: calc(83vw * 0.45);
@@ -20,6 +20,7 @@ const Container = styled.div`
   padding: 40px 34px;
   display: flex;
   justify-content: space-between;
+  margin: auto;
 `;
 
 const Column = styled.div`

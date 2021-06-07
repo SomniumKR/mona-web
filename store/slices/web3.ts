@@ -38,7 +38,7 @@ export const web3Slice = createSlice({
       const endpoint = action.payload;
       state.connection = new Connection(endpoint, 'recent');
     },
-    updateWallet: (state, action: PayloadAction<UpdateWalletParam>) => {
+    connectWalletProvider: (state, action: PayloadAction<UpdateWalletParam>) => {
       const { provider, network } = action.payload;
 
       if (provider) {
@@ -47,6 +47,10 @@ export const web3Slice = createSlice({
         // TODO: notify 'no sollet extension'
         console.log('No sollet extension');
       }
+    },
+    updateWallet: (state, action: PayloadAction<WalletAdapter>) => {
+      const wallet = action.payload;
+      state.wallet = wallet;
     },
     updateChain: (state, action: PayloadAction<Chain>) => {
       const { name, endpoint, chainID } = action.payload;
@@ -70,6 +74,8 @@ export const selectChain = (state: RootState) => state.web3.chain;
 export const selectConnection = (state: RootState) => state.web3.connection;
 export const selectWallet = (state: RootState) => state.web3.wallet;
 
-export const { updateWallet, updateChain, updateConnection } = web3Slice.actions;
+export const {
+  updateWallet, updateChain, updateConnection, connectWalletProvider,
+} = web3Slice.actions;
 
 export default web3Slice.reducer;

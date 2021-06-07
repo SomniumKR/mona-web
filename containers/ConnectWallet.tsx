@@ -1,15 +1,19 @@
-import { useEffect, memo, ComponentProps } from 'react';
+import { useEffect, memo, useState } from 'react';
 import {
-  selectWallet, updateConnection, updateWallet, selectChain, selectConnection,
+  selectWallet,
+  updateConnection,
+  updateWallet,
+  selectChain,
+  selectConnection,
+  connectWalletProvider,
 } from 'store/slices/web3';
 import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
 import styled from '@emotion/styled';
 import Button from 'components/Button/Button';
-
-type ButtonProps = ComponentProps<typeof Button>;
-
-interface Props extends ButtonProps {}
+import { notify } from 'utils/notifications';
+import { COLORS } from 'constants/colors';
+import { css } from '@emotion/react';
 
 const StyledButton = styled(Button)`
   height: 38px;
@@ -17,10 +21,11 @@ const StyledButton = styled(Button)`
   font-size: 14px;
 `;
 
-function ConnectWallet({ ...rest } : Props) {
+function ConnectWallet() {
   const wallet = useAppSelector(selectWallet);
   const chain = useAppSelector(selectChain);
   const connection = useAppSelector(selectConnection);
+  const [walletConnected, setWalletConnected] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -32,10 +37,9 @@ function ConnectWallet({ ...rest } : Props) {
         provider: sollet,
         network: chain.endpoint,
       };
-      dispatch(updateWallet(param));
+      dispatch(connectWalletProvider(param));
     } else {
       // notify 'no sollet extension'
-      console.log('no sollet');
     }
   };
 
@@ -45,7 +49,7 @@ function ConnectWallet({ ...rest } : Props) {
     if (wallet && sollet) {
       await wallet.connect();
     } else {
-      console.log('no sollet');
+      notify('Cannot find Sollet Extension');
     }
   };
 
@@ -57,11 +61,14 @@ function ConnectWallet({ ...rest } : Props) {
     if (wallet) {
       wallet.on('connect', () => {
         if (wallet?.publicKey) {
-          console.log('connected');
-          const walletPublicKey = wallet.publicKey.toBase58();
-          console.log('key : ', walletPublicKey);
+          notify('Wallet connected !', { backgroundColor: COLORS.green01 });
+          setWalletConnected(true);
         }
       });
+    }
+
+    if (!wallet || !wallet.connected) {
+      setWalletConnected(false);
     }
   }, [wallet]);
 
@@ -72,8 +79,13 @@ function ConnectWallet({ ...rest } : Props) {
   }, [chain]);
 
   return (
-    <StyledButton type="button" onClick={connectWallet} redColor {...rest}>
-      Connect Wallet
+    <StyledButton
+      type="button"
+      onClick={connectWallet}
+      redColor={!walletConnected}
+      css={walletConnected && css`cursor: default`}
+    >
+      {walletConnected ? 'Connected' : 'Connect Wallet'}
     </StyledButton>
   );
 }
