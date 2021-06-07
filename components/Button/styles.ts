@@ -6,4 +6,5 @@ export const buttonStyle = css`
   color: white;
   border-radius: 20px;
   padding: 5px 28px;
+  font-family: "SF-Pro-Text-Regular";
 `;

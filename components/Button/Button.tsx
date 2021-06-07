@@ -16,6 +16,7 @@ function Button(props: Props) {
         ${buttonStyle}
         background: ${redColor ? GRADIENTS.red : COLORS.white};
         color: ${redColor ? COLORS.white : COLORS.black01};
+        border: 1px solid ${redColor ? COLORS.white : COLORS.black01};
       `}
       {...rest}
     >

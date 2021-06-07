@@ -62,7 +62,7 @@ export default function Index({ handleSearchInputChange, searchInputText }: Prop
     <Container>
       <Link href="/">
         <a>
-          <Logo height={HEADER_HEIGHT} />
+          <Logo height="48px" />
         </a>
       </Link>
       <SearchInput handleChange={handleSearchInputChange} value={searchInputText} />
