@@ -5,7 +5,7 @@ import { COLORS } from 'constants/colors';
 
 const notificationOptions = (style?: CSSProperties) => ({
   style: {
-    marginTop: HEADER_HEIGHT, background: COLORS.red03, color: COLORS.white, ...style,
+    top: HEADER_HEIGHT, background: COLORS.red03, color: COLORS.white, minHeight: '100%', ...style,
   },
   autoClose: 3000,
   hideProgressBar: true,

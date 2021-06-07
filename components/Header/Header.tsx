@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 import Logo from 'components/Logo';
@@ -76,7 +75,7 @@ export default function Index({ handleSearchInputChange, searchInputText }: Prop
           </Link>
         ))}
       </MenuContainer>
-      <ConnectWallet redColor />
+      <ConnectWallet />
     </Container>
   );
 }
