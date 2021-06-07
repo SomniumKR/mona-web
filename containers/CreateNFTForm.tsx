@@ -12,7 +12,7 @@ import ImageDropzone from 'containers/ImageDropzone';
 import { ImageFile, NFTInfoToSave } from 'types';
 import { useAppSelector } from 'hooks/store';
 import { selectWallet } from 'store/slices/web3';
-import { localstorageNameForNFT } from 'constants/index';
+import { localstorageNameForNFT } from 'constants/storage';
 import { notify } from '../utils/notifications';
 
 const Container = styled.div`

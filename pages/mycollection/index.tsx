@@ -12,8 +12,10 @@ import Modal from 'components/Modal/Modal';
 import CreateNFTForm from 'containers/CreateNFTForm';
 import { useAppSelector } from 'hooks/store';
 import { selectWallet, selectWalletConnected } from 'store/slices/web3';
-import { localstorageNameForNFT } from 'constants';
+import { localstorageNameForNFT } from 'constants/storage';
 import { NFTInfoToSave } from 'types';
+import { fetchBlobFromDataURL } from 'utils';
+import { Heading04 } from 'components/Heading/Heading04';
 
 const Container = styled.div`
   width: 100%;
@@ -31,6 +33,13 @@ const Container = styled.div`
 const Paragraph = styled.p`
   font-size: 1rem;
   color: ${COLORS.grey02};
+`;
+
+const BoxContainer = styled.div`
+  min-width: 1000px;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 const Box = styled.div`
@@ -76,7 +85,7 @@ export default function NFT({ nft }:
       const NFTInfoString = localStorage.getItem(localstorageNameForNFT);
 
       const NFTInfo = JSON.parse(NFTInfoString);
-      setSavedNFTInfo(NFTInfo);
+      setSavedNFTInfo([NFTInfo]);
     }
   };
 
@@ -101,17 +110,31 @@ export default function NFT({ nft }:
         <Paragraph>
           Here you can see the NFT collections you made!
         </Paragraph>
-        <Box>
-          <Heading00>
-            🖼 🎧 🌏 👽 🔫 📮
-          </Heading00>
-          <Heading01 css={css`color: ${COLORS.grey02}`}>
-            Create new NFT
-          </Heading01>
-          <Button redColor onClick={toogleCreateButton}>
-            Create
-          </Button>
-        </Box>
+        <BoxContainer>
+          <Box>
+            <Heading00>
+              🖼 🎧 🌏 👽 🔫 📮
+            </Heading00>
+            <Heading01 css={css`color: ${COLORS.grey02}`}>
+              Create new NFT
+            </Heading01>
+            <Button redColor onClick={toogleCreateButton}>
+              Create
+            </Button>
+          </Box>
+          {Boolean(savedNFTInfo.length)
+      && (
+      <Box>
+        <img src={fetchBlobFromDataURL(savedNFTInfo[0]?.file as string)} alt="sample" width="80%" height="auto" />
+        <Heading04>
+          {savedNFTInfo[0]?.name}
+        </Heading04>
+        <Button redColor>
+          Sell this NFT
+        </Button>
+      </Box>
+      )}
+        </BoxContainer>
       </Container>
       <Modal isOpen={isCreateModalOpen}>
         <CreateNFTForm handleCancel={toogleCreateButton} handleCreateNFT={handleCreateNFT} />
