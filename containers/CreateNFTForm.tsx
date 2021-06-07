@@ -9,6 +9,7 @@ import { css } from '@emotion/react';
 import Button from 'components/Button/Button';
 import RHFInput from 'components/Form/RHFINput';
 import RHFTextarea from 'components/Form/RHFTextarea';
+import ImageDropzone from 'containers/ImageDropzone';
 
 const Container = styled.div`
   /* width: 65vw; */
@@ -103,11 +104,7 @@ export default function CreateNFTForm({ handleCancel }: Props) {
             <GrayHeading04>
               Image
             </GrayHeading04>
-            <Image
-              src="/images/icons/award.svg"
-              width="264px"
-              height="264px"
-            />
+            <ImageDropzone />
             <GrayHeading04 css={css`font-family: "SF-Pro-Text-Light"`}>
               File types: JPG, PNG, SVG
             </GrayHeading04>
