@@ -38,8 +38,8 @@ function ImageDropzone({
 
   const thumb = () => (
     <img
-      src={uploadedImage[0].preview}
-      alt={uploadedImage[0].name}
+      src={uploadedImage[0]?.preview}
+      alt={uploadedImage[0]?.name}
       width="100%"
       height="100%"
       css={css`

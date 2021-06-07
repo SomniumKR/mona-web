@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { InferGetServerSidePropsType } from 'next';
 import styled from '@emotion/styled';
 import Header from 'components/Header/Header';
@@ -10,6 +10,10 @@ import Button from 'components/Button/Button';
 import { Heading00 } from 'components/Heading/Heading00';
 import Modal from 'components/Modal/Modal';
 import CreateNFTForm from 'containers/CreateNFTForm';
+import { useAppSelector } from 'hooks/store';
+import { selectWallet } from 'store/slices/web3';
+import { localstorageNameForNFT } from 'constants';
+import { NFTInfoToSave } from 'types';
 
 const Container = styled.div`
   width: 100%;
@@ -49,6 +53,10 @@ const Box = styled.div`
 export default function NFT({ nft }:
      InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [searchInputText, setSearchInputText] = useState('');
+  const [savedNFTInfo, setSavedNFTInfo] = useState<NFTInfoToSave[]>([]);
+
+  const wallet = useAppSelector(selectWallet);
+
   const handleSearchInputChange = useCallback(
     (value: string) => {
       setSearchInputText(value);
@@ -61,6 +69,23 @@ export default function NFT({ nft }:
   const toogleCreateButton = () => {
     setCreateModalOpen(!isCreateModalOpen);
   };
+
+  const getSavedNFT = () => {
+    if (wallet) {
+      const NFTInfoString = localStorage.getItem(localstorageNameForNFT);
+
+      const NFTInfo = JSON.parse(NFTInfoString);
+      setSavedNFTInfo(savedNFTInfo);
+    }
+  };
+
+  const handleCreateNFT = (NFTInfo: NFTInfoToSave) => {
+    setSavedNFTInfo([NFTInfo]);
+  };
+
+  useEffect(() => {
+    getSavedNFT();
+  }, [wallet]);
 
   return (
     <>
@@ -88,7 +113,7 @@ export default function NFT({ nft }:
         </Box>
       </Container>
       <Modal isOpen={isCreateModalOpen}>
-        <CreateNFTForm handleCancel={toogleCreateButton} />
+        <CreateNFTForm handleCancel={toogleCreateButton} handleCreateNFT={handleCreateNFT} />
       </Modal>
     </>
   );

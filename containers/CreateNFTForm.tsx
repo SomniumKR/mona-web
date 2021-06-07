@@ -88,9 +88,10 @@ const ButtonContainer = styled.div`
 
 interface Props {
   handleCancel: () => void;
+  handleCreateNFT?: (nftInfo: NFTInfoToSave) => void;
 }
 
-export default function CreateNFTForm({ handleCancel }: Props) {
+export default function CreateNFTForm({ handleCancel, handleCreateNFT }: Props) {
   const [uploadedImage, setUploadedImage] = useState<ImageFile[]>([]);
 
   const wallet = useAppSelector(selectWallet);
@@ -102,7 +103,7 @@ export default function CreateNFTForm({ handleCancel }: Props) {
   const {
     register, handleSubmit, formState,
   } = useForm();
-  const { isSubmitting, errors } = formState;
+  const { isSubmitting } = formState;
 
   const onSubmit = (data) => {
     if (uploadedImage.length) {
@@ -116,9 +117,15 @@ export default function CreateNFTForm({ handleCancel }: Props) {
           description: data.description,
         };
 
-        localStorage.setItem(localstorageNameForNFT, JSON.stringify(NFTToSave));
-        notify('New NFT Saved !', { backgroundColor: COLORS.green01 });
-        handleCancel();
+        try {
+          localStorage.setItem(localstorageNameForNFT, JSON.stringify(NFTToSave));
+          notify('New NFT Saved !', { backgroundColor: COLORS.green01 });
+          handleCreateNFT(NFTToSave);
+          handleCancel();
+        } catch (e) {
+          console.error(e);
+          notify('Error. Please check upload image');
+        }
       } else {
         notify('You need connect wallet');
       }
