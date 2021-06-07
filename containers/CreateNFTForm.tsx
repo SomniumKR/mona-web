@@ -12,6 +12,7 @@ import ImageDropzone from 'containers/ImageDropzone';
 import { ImageFile, NFTInfoToSave } from 'types';
 import { useAppSelector } from 'hooks/store';
 import { selectWallet } from 'store/slices/web3';
+import { localstorageNameForNFT } from 'constants/index';
 import { notify } from '../utils/notifications';
 
 const Container = styled.div`
@@ -101,24 +102,28 @@ export default function CreateNFTForm({ handleCancel }: Props) {
   const {
     register, handleSubmit, formState,
   } = useForm();
-  const { isSubmitting } = formState;
+  const { isSubmitting, errors } = formState;
 
   const onSubmit = (data) => {
-    if (wallet?.publicKey) {
-      const pubKey = wallet.publicKey.toBase58();
+    if (uploadedImage.length) {
+      if (wallet?.publicKey) {
+        const pubKey = wallet.publicKey.toBase58();
 
-      const NFTToSave: NFTInfoToSave = {
-        file: uploadedImage[0].imageData,
-        name: data.name,
-        creator: pubKey,
-        description: data.description,
-      };
+        const NFTToSave: NFTInfoToSave = {
+          file: uploadedImage[0].imageData,
+          name: data.name,
+          creator: pubKey,
+          description: data.description,
+        };
 
-      localStorage.setItem('Mona-nft-info-saved', JSON.stringify(NFTToSave));
-      notify('New NFT Saved !', { backgroundColor: COLORS.green01 });
-      handleCancel();
+        localStorage.setItem(localstorageNameForNFT, JSON.stringify(NFTToSave));
+        notify('New NFT Saved !', { backgroundColor: COLORS.green01 });
+        handleCancel();
+      } else {
+        notify('You need connect wallet');
+      }
     } else {
-      notify('You need connect wallet');
+      notify('Please upload image to save NFT');
     }
   };
 
@@ -133,7 +138,13 @@ export default function CreateNFTForm({ handleCancel }: Props) {
             <GrayHeading04>
               Image
             </GrayHeading04>
-            <ImageDropzone handleImageUpload={handleImageUpload} uploadedImage={uploadedImage} />
+            <ImageDropzone
+              handleImageUpload={handleImageUpload}
+              uploadedImage={uploadedImage}
+              register={register}
+              required
+              name="image"
+            />
             <GrayHeading04 css={css`font-family: "SF-Pro-Text-Light"`}>
               File types: JPG, PNG, SVG
             </GrayHeading04>

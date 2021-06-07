@@ -4,13 +4,20 @@ import { useDropzone } from 'react-dropzone';
 import { COLORS } from 'constants/colors';
 import { css } from '@emotion/react';
 import { ImageFile } from 'types';
+import { UseFormRegister, FieldValues } from 'react-hook-form';
 
 interface Props {
   handleImageUpload?: (images: ImageFile[]) => void;
   uploadedImage?: ImageFile[];
+  register?: UseFormRegister<FieldValues>;
+  required?: boolean;
+  name?: string;
+  className?: string;
 }
 
-function ImageDropzone({ handleImageUpload, uploadedImage }: Props) {
+function ImageDropzone({
+  handleImageUpload, uploadedImage, className,
+}: Props) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
@@ -58,7 +65,7 @@ function ImageDropzone({ handleImageUpload, uploadedImage }: Props) {
         margin: 16px 0;
         `}
     >
-      <input {...getInputProps()} />
+      <input className={className} type="file" {...getInputProps()} />
       {uploadedImage?.length ? thumb()
         : (
           <Image
