@@ -14,6 +14,7 @@ export interface Web3State {
   wallet: WalletAdapter;
   connection: Connection;
   chain: Chain;
+  walletConnected: boolean;
   status: 'success' | 'loading' | 'failed';
 }
 
@@ -25,6 +26,7 @@ const initialState: Web3State = {
     endpoint: ENDPOINTS.MainnetBeta,
     chainID: ChainID.MainnetBeta,
   },
+  walletConnected: false,
   status: 'loading',
 };
 
@@ -51,10 +53,14 @@ export const web3Slice = createSlice({
     updateWallet: (state, action: PayloadAction<WalletAdapter>) => {
       const wallet = action.payload;
       state.wallet = wallet;
+      state.walletConnected = true;
     },
     updateChain: (state, action: PayloadAction<Chain>) => {
       const { name, endpoint, chainID } = action.payload;
       state.chain = { name, endpoint, chainID };
+    },
+    disconnectWallet: (state) => {
+      state.walletConnected = false;
     },
 
   },
@@ -73,9 +79,10 @@ export const web3Slice = createSlice({
 export const selectChain = (state: RootState) => state.web3.chain;
 export const selectConnection = (state: RootState) => state.web3.connection;
 export const selectWallet = (state: RootState) => state.web3.wallet;
+export const selectWalletConnected = (state: RootState) => state.web3.walletConnected;
 
 export const {
-  updateWallet, updateChain, updateConnection, connectWalletProvider,
+  updateWallet, updateChain, updateConnection, connectWalletProvider, disconnectWallet,
 } = web3Slice.actions;
 
 export default web3Slice.reducer;

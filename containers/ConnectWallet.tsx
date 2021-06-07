@@ -6,6 +6,8 @@ import {
   selectChain,
   selectConnection,
   connectWalletProvider,
+  selectWalletConnected,
+  disconnectWallet,
 } from 'store/slices/web3';
 import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
@@ -25,7 +27,7 @@ function ConnectWallet() {
   const wallet = useAppSelector(selectWallet);
   const chain = useAppSelector(selectChain);
   const connection = useAppSelector(selectConnection);
-  const [walletConnected, setWalletConnected] = useState(false);
+  const walletConnected = useAppSelector(selectWalletConnected);
 
   const dispatch = useAppDispatch();
 
@@ -62,13 +64,13 @@ function ConnectWallet() {
       wallet.on('connect', () => {
         if (wallet?.publicKey) {
           notify('Wallet connected !', { backgroundColor: COLORS.green01 });
-          setWalletConnected(true);
+          dispatch(updateWallet(wallet));
         }
       });
     }
 
     if (!wallet || !wallet.connected) {
-      setWalletConnected(false);
+      dispatch(disconnectWallet());
     }
   }, [wallet]);
 
