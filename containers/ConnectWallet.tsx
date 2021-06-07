@@ -6,6 +6,8 @@ import { useAppSelector, useAppDispatch } from 'hooks/store';
 import { UpdateWalletParam } from 'types/web3';
 import styled from '@emotion/styled';
 import Button from 'components/Button/Button';
+import { notify } from 'utils/notifications';
+import { COLORS } from 'constants/colors';
 
 type ButtonProps = ComponentProps<typeof Button>;
 
@@ -35,7 +37,6 @@ function ConnectWallet({ ...rest } : Props) {
       dispatch(updateWallet(param));
     } else {
       // notify 'no sollet extension'
-      console.log('no sollet');
     }
   };
 
@@ -46,6 +47,7 @@ function ConnectWallet({ ...rest } : Props) {
       await wallet.connect();
     } else {
       console.log('no sollet');
+      notify('Cannot find Sollet Extension');
     }
   };
 
@@ -57,9 +59,9 @@ function ConnectWallet({ ...rest } : Props) {
     if (wallet) {
       wallet.on('connect', () => {
         if (wallet?.publicKey) {
-          console.log('connected');
-          const walletPublicKey = wallet.publicKey.toBase58();
-          console.log('key : ', walletPublicKey);
+          notify('Wallet connected !', { backgroundColor: COLORS.green01 });
+          // const walletPublicKey = wallet.publicKey.toBase58();
+          // console.log('key : ', walletPublicKey);
         }
       });
     }

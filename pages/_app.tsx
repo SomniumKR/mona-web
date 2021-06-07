@@ -3,6 +3,8 @@ import { css, Global } from '@emotion/react';
 import emotionNormalize from 'emotion-normalize';
 import { wrapper } from 'store';
 import { SFProTextFont } from 'styles';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       />
       <Component {...pageProps} />
-
+      <ToastContainer />
     </>
   );
 }

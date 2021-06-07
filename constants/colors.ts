@@ -8,8 +8,10 @@ export const COLORS = {
   lightRed: '#FFF7F7',
   red01: '#E51B16',
   red02: '#B13434',
+  red03: '#E35D5B',
   grey01: '#E5E5E5',
   grey02: '#404040',
+  green01: '#5ad45a',
 };
 
 export const GRADIENTS = {
