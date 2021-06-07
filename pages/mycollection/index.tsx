@@ -11,7 +11,7 @@ import { Heading00 } from 'components/Heading/Heading00';
 import Modal from 'components/Modal/Modal';
 import CreateNFTForm from 'containers/CreateNFTForm';
 import { useAppSelector } from 'hooks/store';
-import { selectWallet } from 'store/slices/web3';
+import { selectWallet, selectWalletConnected } from 'store/slices/web3';
 import { localstorageNameForNFT } from 'constants';
 import { NFTInfoToSave } from 'types';
 
@@ -56,6 +56,7 @@ export default function NFT({ nft }:
   const [savedNFTInfo, setSavedNFTInfo] = useState<NFTInfoToSave[]>([]);
 
   const wallet = useAppSelector(selectWallet);
+  const walletConnected = useAppSelector(selectWalletConnected);
 
   const handleSearchInputChange = useCallback(
     (value: string) => {
@@ -71,11 +72,11 @@ export default function NFT({ nft }:
   };
 
   const getSavedNFT = () => {
-    if (wallet) {
+    if (wallet && walletConnected) {
       const NFTInfoString = localStorage.getItem(localstorageNameForNFT);
 
       const NFTInfo = JSON.parse(NFTInfoString);
-      setSavedNFTInfo(savedNFTInfo);
+      setSavedNFTInfo(NFTInfo);
     }
   };
 
@@ -85,7 +86,7 @@ export default function NFT({ nft }:
 
   useEffect(() => {
     getSavedNFT();
-  }, [wallet]);
+  }, [wallet, walletConnected]);
 
   return (
     <>
