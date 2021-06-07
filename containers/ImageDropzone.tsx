@@ -1,17 +1,29 @@
-import { useState, memo } from 'react';
+import { memo } from 'react';
 import Image from 'next/image';
 import { useDropzone } from 'react-dropzone';
 import { COLORS } from 'constants/colors';
 import { css } from '@emotion/react';
+import { ImageFile } from 'types';
 
-function ImageDropzone() {
-  const [files, setFiles] = useState([]);
+interface Props {
+  handleImageUpload?: (images: ImageFile[]) => void;
+  uploadedImage?: ImageFile[];
+}
+
+function ImageDropzone({ handleImageUpload, uploadedImage }: Props) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      setFiles(acceptedFiles.map((file) => Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      })));
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageBinaryString = reader.result;
+
+        handleImageUpload(acceptedFiles.map((file) => Object.assign(file, {
+          preview: URL.createObjectURL(file),
+          imageData: imageBinaryString,
+        })));
+      };
+      reader.readAsDataURL(acceptedFiles[0]);
     },
     disabled: false,
     maxSize: 1e+7, // 10MB
@@ -19,8 +31,8 @@ function ImageDropzone() {
 
   const thumb = () => (
     <img
-      src={files[0].preview}
-      alt={files[0].name}
+      src={uploadedImage[0].preview}
+      alt={uploadedImage[0].name}
       width="100%"
       height="100%"
       css={css`
@@ -47,7 +59,7 @@ function ImageDropzone() {
         `}
     >
       <input {...getInputProps()} />
-      {files.length ? thumb()
+      {uploadedImage?.length ? thumb()
         : (
           <Image
             src="/images/icons/plus-circle.svg"

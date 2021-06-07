@@ -20,7 +20,7 @@ const Contents = styled.div`
 
 interface Props {
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   children: ReactNode;
 }
 
@@ -30,7 +30,7 @@ const Modal = ({
   if (!isOpen) return null;
   return ReactDOM.createPortal(
     <Container>
-      <button onClick={onClose}>Close</button>
+      {onClose && <button onClick={onClose}>Close</button> }
       <Contents>
         {children}
       </Contents>

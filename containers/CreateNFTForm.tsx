@@ -1,5 +1,4 @@
-import React from 'react';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from '@emotion/styled';
 import { COLORS } from 'constants/colors';
@@ -10,6 +9,10 @@ import Button from 'components/Button/Button';
 import RHFInput from 'components/Form/RHFINput';
 import RHFTextarea from 'components/Form/RHFTextarea';
 import ImageDropzone from 'containers/ImageDropzone';
+import { ImageFile, NFTInfoToSave } from 'types';
+import { useAppSelector } from 'hooks/store';
+import { selectWallet } from 'store/slices/web3';
+import { notify } from '../utils/notifications';
 
 const Container = styled.div`
   /* width: 65vw; */
@@ -87,12 +90,38 @@ interface Props {
 }
 
 export default function CreateNFTForm({ handleCancel }: Props) {
+  const [uploadedImage, setUploadedImage] = useState<ImageFile[]>([]);
+
+  const wallet = useAppSelector(selectWallet);
+
+  const handleImageUpload = (images: ImageFile[]) => {
+    setUploadedImage(images);
+  };
+
   const {
     register, handleSubmit, formState,
   } = useForm();
-  const { isDirty, isSubmitting } = formState;
+  const { isSubmitting } = formState;
 
-  const onSubmit = (data) => alert(JSON.stringify(data, null, 2));
+  const onSubmit = (data) => {
+    if (wallet?.publicKey) {
+      const pubKey = wallet.publicKey.toBase58();
+
+      const NFTToSave: NFTInfoToSave = {
+        file: uploadedImage[0].imageData,
+        name: data.name,
+        creator: pubKey,
+        description: data.description,
+      };
+
+      localStorage.setItem('Mona-nft-info-saved', JSON.stringify(NFTToSave));
+      notify('New NFT Saved !', { backgroundColor: COLORS.green01 });
+      handleCancel();
+    } else {
+      notify('You need connect wallet');
+    }
+  };
+
   return (
     <Container>
       <Heading01 css={css`margin-bottom: 24px`}>
@@ -104,7 +133,7 @@ export default function CreateNFTForm({ handleCancel }: Props) {
             <GrayHeading04>
               Image
             </GrayHeading04>
-            <ImageDropzone />
+            <ImageDropzone handleImageUpload={handleImageUpload} uploadedImage={uploadedImage} />
             <GrayHeading04 css={css`font-family: "SF-Pro-Text-Light"`}>
               File types: JPG, PNG, SVG
             </GrayHeading04>
@@ -116,11 +145,11 @@ export default function CreateNFTForm({ handleCancel }: Props) {
             <GrayHeading04>
               Name
             </GrayHeading04>
-            <StyledInput type="text" register={register} required name="Title" />
+            <StyledInput type="text" register={register} required name="name" />
             <GrayHeading04>
               Description
             </GrayHeading04>
-            <StyledTextarea register={register} required name="Description" />
+            <StyledTextarea register={register} required name="description" />
             <ButtonContainer>
               <Button redColor type="submit" disabled={isSubmitting}>
                 Create

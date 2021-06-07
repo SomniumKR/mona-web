@@ -87,7 +87,7 @@ export default function NFT({ nft }:
           </Button>
         </Box>
       </Container>
-      <Modal isOpen={isCreateModalOpen} onClose={toogleCreateButton}>
+      <Modal isOpen={isCreateModalOpen}>
         <CreateNFTForm handleCancel={toogleCreateButton} />
       </Modal>
     </>
