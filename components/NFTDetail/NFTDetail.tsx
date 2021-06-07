@@ -52,7 +52,7 @@ const BiddingContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 20px;
-  border: 1px solid ${COLORS.grey02};
+  border: 1px solid ${COLORS.grey01};
   padding: 16px 24px;
   margin: 24px 0;
 `;
@@ -189,8 +189,8 @@ function NFTDetail({ nft }: Props) {
               ) : (
                 <>
                   {biddingHistory.map((bidding) => (
-                    <Heading04 key={bidding.usdc}>
-                      <span css={css`font-family: 'SF-Pro-Text-Bold'`}>
+                    <Paragraph key={bidding.usdc}>
+                      <span css={css`font-family: 'SF-Pro-Text-Bold'; color: ${COLORS.grey02}`}>
                         {bidding.usdc}
                         {' '}
                         USDC
@@ -199,7 +199,7 @@ function NFTDetail({ nft }: Props) {
                       by
                       {' '}
                       {bidding.bidder}
-                    </Heading04>
+                    </Paragraph>
                   ))}
                 </>
               )}
