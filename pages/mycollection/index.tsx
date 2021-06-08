@@ -16,7 +16,6 @@ import { localstorageNameForNFT } from 'constants/storage';
 import { NFTInfoToSave } from 'types';
 import { fetchBlobFromDataURL } from 'utils';
 import { Heading04 } from 'components/Heading/Heading04';
-import { initEscrow } from 'api/layout';
 import { Heading02 } from 'components/Heading/Heading02';
 import ClipLoader from 'react-spinners/ClipLoader';
 import Link from 'next/link';
