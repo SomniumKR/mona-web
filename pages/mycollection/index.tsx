@@ -94,12 +94,16 @@ export default function NFT({ nft }:
   };
 
   const getSavedNFT = () => {
-    // if (wallet && walletConnected) {
-    const NFTInfoString = localStorage.getItem(localstorageNameForNFT);
+    if (wallet && walletConnected) {
+      try {
+        const NFTInfoString = localStorage.getItem(localstorageNameForNFT);
 
-    const NFTInfo = JSON.parse(NFTInfoString);
-    setSavedNFTInfo([NFTInfo]);
-    // }
+        const NFTInfo = JSON.parse(NFTInfoString);
+        setSavedNFTInfo([NFTInfo]);
+      } catch (e) {
+        console.error(e);
+      }
+    }
   };
 
   const handleCreateNFT = (NFTInfo: NFTInfoToSave) => {
