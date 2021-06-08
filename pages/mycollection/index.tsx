@@ -16,6 +16,12 @@ import { localstorageNameForNFT } from 'constants/storage';
 import { NFTInfoToSave } from 'types';
 import { fetchBlobFromDataURL } from 'utils';
 import { Heading04 } from 'components/Heading/Heading04';
+import { initEscrow } from 'api/layout';
+import { Heading02 } from 'components/Heading/Heading02';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Link from 'next/link';
+import { createMint } from '../../api/nft';
+import { notify } from '../../utils/notifications';
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +39,7 @@ const Container = styled.div`
 const Paragraph = styled.p`
   font-size: 1rem;
   color: ${COLORS.grey02};
+  word-break: break-all;
 `;
 
 const BoxContainer = styled.div`
@@ -58,7 +65,14 @@ const Box = styled.div`
   padding: 62px 0;
   box-sizing: border-box;
 `;
-
+const ItemBox = styled.div`
+    width: 300px;
+    height: 200px;
+    margin: 20% auto;
+    border-radius: 40px;
+    padding: 24px 16px;
+    background-color: white;
+`;
 export default function NFT({ nft }:
      InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [searchInputText, setSearchInputText] = useState('');
@@ -93,9 +107,22 @@ export default function NFT({ nft }:
     setSavedNFTInfo([NFTInfo]);
   };
 
+  const [isMintingModalOpen, setMintingModalOpen] = useState(false);
+  const [txx, setTx] = useState('');
+
   useEffect(() => {
     getSavedNFT();
   }, [wallet, walletConnected]);
+
+  const onClickMint = async () => {
+    if (wallet && walletConnected) {
+      setMintingModalOpen(true);
+      const tx = await createMint();
+      setTx(tx);
+    } else {
+      notify('You need connect wallet');
+    }
+  };
 
   return (
     <>
@@ -125,12 +152,12 @@ export default function NFT({ nft }:
           {Boolean(savedNFTInfo.length)
       && (
       <Box>
-        <img src={fetchBlobFromDataURL(savedNFTInfo[0]?.file as string)} alt="sample" width="80%" height="auto" />
+        <img src={fetchBlobFromDataURL(savedNFTInfo[0]?.file as string)} alt="sample" width="200px" height="auto" />
         <Heading04>
           {savedNFTInfo[0]?.name}
         </Heading04>
-        <Button redColor>
-          Sell this NFT
+        <Button redColor onClick={onClickMint}>
+          Mint this NFT
         </Button>
       </Box>
       )}
@@ -138,6 +165,24 @@ export default function NFT({ nft }:
       </Container>
       <Modal isOpen={isCreateModalOpen}>
         <CreateNFTForm handleCancel={toogleCreateButton} handleCreateNFT={handleCreateNFT} />
+      </Modal>
+      <Modal isOpen={isMintingModalOpen}>
+        <ItemBox>
+          {!txx ? <Heading02>Minting Your NFT...</Heading02>
+            : <Heading02>Your NFT Minted !</Heading02> }
+          {txx ? (
+            <>
+              <Heading04>
+                Transaction Hash
+
+              </Heading04>
+              <Paragraph>
+                {txx}
+              </Paragraph>
+              <Link href={`https://explorer.solana.com/address/${txx}?cluster=devnet`}>Show in Explorer</Link>
+            </>
+          ) : <ClipLoader color="red" loading={!txx} size={100} />}
+        </ItemBox>
       </Modal>
     </>
   );
